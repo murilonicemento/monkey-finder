@@ -1,0 +1,83 @@
+﻿## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## MAUI
+**/Platforms/**/bin/
+**/Platforms/**/obj/
+**/Resources/Raw/*.db
+
+# Arquivos de log do build
+*.log
+
+## Visual Studio
+.vscode/
+.vs/
+.vscode/*
+
+# Arquivos do Rider
+.idea/
+*.sln.iml
+
+# Arquivos de backup do macOS
+*.DS_Store
+
+# Arquivos do Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Arquivos do Android Studio
+.gradle/
+local.properties
+*.iml
+
+# Build intermediário do Android
+**/build/
+**/intermediates/
+**/generated/
+
+# Build do iOS
+**/DerivedData/
+**/xcuserdata/
+*.xcuserstate
+
+# Certificados e senhas sensíveis (caso use Keychain ou provisioning profile)
+*.p12
+*.mobileprovision
+*.cer
+
+# Arquivos temporários
+*.tmp
+*.bak
+
+# Cache do NuGet
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Arquivos de configuração pessoal
+*.userprefs
+
+# Logs de crash do MAUI
+crashlogs/
+
+# Arquivos do Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Configurações de diretório de publicação
+PublishProfiles/
+
+# Arquivos de simulação/dispositivos
+**/.simulator/
+**/.device/
+
+# Arquivos de depuração (pdbs)
+*.pdb
