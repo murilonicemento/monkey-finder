@@ -25,7 +25,21 @@ public partial class MonkeysViewModel : BaseViewModel
 
         try
         {
+            // await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            var location = await _geolocation.GetLastKnownLocationAsync() ?? await _geolocation.GetLocationAsync(
+                new GeolocationRequest
+                {
+                    DesiredAccuracy = GeolocationAccuracy.Medium,
+                    Timeout = TimeSpan.FromSeconds(30)
+                });
 
+            var first = Monkeys.OrderBy(m => location.CalculateDistance(m.Latitude, m.Longitude, DistanceUnits.Miles))
+                .FirstOrDefault();
+
+            if (first is null)
+                return;
+
+            await Shell.Current.DisplayAlert("Closest monkey", $"{first.Name} in {first.Location}", "OK");
         }
         catch (Exception exception)
         {
