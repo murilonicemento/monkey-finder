@@ -8,4 +8,10 @@ public partial class MonkeyDetailsViewModel : BaseViewModel
     public MonkeyDetailsViewModel()
     {
     }
+    
+    // [RelayCommand]
+    // private async Task GoBackAsync()
+    // {
+    //     await Shell.Current.GoToAsync("..");
+    // }
 }
