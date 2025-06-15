@@ -5,12 +5,34 @@ namespace MonkeyFinder.ViewModel;
 public partial class MonkeysViewModel : BaseViewModel
 {
     private MonkeyService _monkeyService;
-    public ObservableCollection<Monkey> Monkeys { get; } = new();
+    private IConnectivity _connectivity;
+    private readonly IGeolocation _geolocation;
+    public ObservableCollection<Monkey> Monkeys { get; } = [];
 
-    public MonkeysViewModel(MonkeyService monkeyService)
+    public MonkeysViewModel(MonkeyService monkeyService, IConnectivity connectivity, IGeolocation geolocation)
     {
         _monkeyService = monkeyService;
+        _connectivity = connectivity;
+        _geolocation = geolocation;
         Title = "Monkey Finder";
+    }
+
+    [RelayCommand]
+    private async Task GetClosestMonkeyAsync()
+    {
+        if (IsBusy || Monkeys.Count == 0)
+            return;
+
+        try
+        {
+
+        }
+        catch (Exception exception)
+        {
+            Debug.WriteLine(exception);
+
+            await Shell.Current.DisplayAlert("Error!", $"Unable to get closest monkey: {exception.Message}", "OK");
+        }
     }
 
     [RelayCommand]
@@ -31,6 +53,13 @@ public partial class MonkeysViewModel : BaseViewModel
 
         try
         {
+            if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Internet issue!", $"Check your internet and try again.", "OK");
+
+                return;
+            }
+
             IsBusy = true;
 
             var monkeys = await _monkeyService.GetMonkeys();
