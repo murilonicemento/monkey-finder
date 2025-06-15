@@ -7,6 +7,7 @@ public partial class MonkeysViewModel : BaseViewModel
     private MonkeyService _monkeyService;
     private IConnectivity _connectivity;
     private readonly IGeolocation _geolocation;
+    [ObservableProperty] private bool isRefreshing;
     public ObservableCollection<Monkey> Monkeys { get; } = [];
 
     public MonkeysViewModel(MonkeyService monkeyService, IConnectivity connectivity, IGeolocation geolocation)
@@ -46,6 +47,11 @@ public partial class MonkeysViewModel : BaseViewModel
             Debug.WriteLine(exception);
 
             await Shell.Current.DisplayAlert("Error!", $"Unable to get closest monkey: {exception.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+            IsRefreshing = false;
         }
     }
 
