@@ -1,5 +1,39 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MonkeyFinder.DetailsPage">
+             x:Class="MonkeyFinder.DetailsPage"
+             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
+             x:DataType="viewmodel:MonkeyDetailsViewModel"
+             Title="{Binding Monkey.Name}">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*,Auto,*" RowDefinitions="160,Auto">
+                <BoxView BackgroundColor="{StaticResource Primary}" Grid.ColumnSpan="3" HeightRequest="160"
+                         HorizontalOptions="FillAndExpand">
+                </BoxView>
+                <Frame Grid.RowSpan="2" Grid.Column="1" HeightRequest="160" WidthRequest="160" CornerRadius="80"
+                       HorizontalOptions="Center" Padding="0"
+                       IsClippedToBounds="True"
+                       Margin="0,80,0,0">
+                    <Image Aspect="AspectFill" HeightRequest="160" WidthRequest="160" HorizontalOptions="Center"
+                           VerticalOptions="Center" Source="{Binding Monkey.Image}">
+                    </Image>
+                </Frame>
+            </Grid>
+
+            <VerticalStackLayout Padding="10" Spacing="10">
+                <Label Text="{Binding Monkey.Details, StringFormat='Details: {0}'}"
+                       Style="{StaticResource MediumLabel}">
+                </Label>
+                <Label Text="{Binding Monkey.Location, StringFormat='Location: {0}'}"
+                       Style="{StaticResource SmallLabel}">
+                </Label>
+                <Label Text="{Binding Monkey.Population, StringFormat='Population: {0}'}"
+                       Style="{StaticResource SmallLabel}">
+                </Label>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
